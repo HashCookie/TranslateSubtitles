@@ -1,0 +1,1032 @@
+0
+00:00:00,000 --> 00:00:05,960
+&gt;&gt; [MUSIC PLAYING]
+
+1
+00:00:05,960 --> 00:00:08,540
+&gt;&gt; DOUG LLOYD: Hi, so let&#39;s talk about operators in C.
+
+2
+00:00:08,540 --> 00:00:12,590
+So, we&#39;ve already seen one, in fact, equals the assignment operator.
+
+3
+00:00:12,590 --> 00:00:15,510
+It allows us to just put a value into a variable.
+
+4
+00:00:15,510 --> 00:00:18,046
+That&#39;s the assignment operator, single equal sign.
+
+5
+00:00:18,046 --> 00:00:20,670
+In order to manipulate and work with values and variables in C,
+
+6
+00:00:20,670 --> 00:00:23,710
+we have a number of operators at our disposal that we can use.
+
+7
+00:00:23,710 --> 00:00:25,543
+Let&#39;s take a look at some of the common ones
+
+8
+00:00:25,543 --> 00:00:27,430
+starting with arithmetic operators.
+
+9
+00:00:27,430 --> 00:00:31,080
+As you might expect, we can do pretty basic math operations in C.
+
+10
+00:00:31,080 --> 00:00:36,520
+We can add, subtract, multiply, and divide numbers using plus, minus, star,
+
+11
+00:00:36,520 --> 00:00:38,422
+and slash, respectively.
+
+12
+00:00:38,422 --> 00:00:40,630
+Here&#39;s a couple of lines of code in which we do that.
+
+13
+00:00:40,630 --> 00:00:44,150
+So, we have int x equals y plus 1.
+
+14
+00:00:44,150 --> 00:00:46,460
+Let&#39;s assume that somewhere up above this line of code
+
+15
+00:00:46,460 --> 00:00:49,230
+we had said int y equals 10.
+
+16
+00:00:49,230 --> 00:00:55,790
+What&#39;s the value of x after I execute this first line of code?
+
+17
+00:00:55,790 --> 00:00:56,700
+Did you say 11?
+
+18
+00:00:56,700 --> 00:00:57,910
+You&#39;d right.
+
+19
+00:00:57,910 --> 00:00:58,420
+Why is that?
+
+20
+00:00:58,420 --> 00:00:59,790
+Well, y was 10.
+
+21
+00:00:59,790 --> 00:01:03,215
+Some I&#39;m saying int x equals 10 plus 1.
+
+22
+00:01:03,215 --> 00:01:04,269
+10 plus 1 is 11.
+
+23
+00:01:04,269 --> 00:01:08,540
+So, the value 11 gets stored in the variable x.
+
+24
+00:01:08,540 --> 00:01:09,740
+Not too bad, right?
+
+25
+00:01:09,740 --> 00:01:14,040
+&gt;&gt; How about this next line of code? x equals x times 5.
+
+26
+00:01:14,040 --> 00:01:17,700
+Well, before we executed this line of code, x was 11.
+
+27
+00:01:17,700 --> 00:01:21,237
+So, what is the value of x after this line of code?
+
+28
+00:01:21,237 --> 00:01:21,820
+Take a second.
+
+29
+00:01:24,710 --> 00:01:27,620
+So, x equals x times 5.
+
+30
+00:01:27,620 --> 00:01:29,850
+x was 11.
+
+31
+00:01:29,850 --> 00:01:32,970
+So, x equals 11 times 5.
+
+32
+00:01:32,970 --> 00:01:34,360
+Or 55.
+
+33
+00:01:34,360 --> 00:01:36,490
+So if you said 55, you&#39;d be right.
+
+34
+00:01:36,490 --> 00:01:41,770
+&gt;&gt; Now, it may be a little confusing, but with the way that assignment works in C
+
+35
+00:01:41,770 --> 00:01:46,030
+is the value on the right gets assigned to the value on the left.
+
+36
+00:01:46,030 --> 00:01:49,090
+So, first we evaluate x times 5.
+
+37
+00:01:49,090 --> 00:01:50,800
+So, 11 times 5 is 55.
+
+38
+00:01:50,800 --> 00:01:53,340
+And then we store that value in x.
+
+39
+00:01:53,340 --> 00:01:56,100
+The 11 that was there before is now overwritten.
+
+40
+00:01:56,100 --> 00:01:58,280
+So x&#39;s value is now 55.
+
+41
+00:01:58,280 --> 00:02:00,820
+Hopefully that&#39;s fairly straightforward.
+
+42
+00:02:00,820 --> 00:02:04,246
+&gt;&gt; There&#39;s another operator that you&#39;ve probably not necessarily heard
+
+43
+00:02:04,246 --> 00:02:06,620
+called this, but you&#39;ve certainly worked with in the past
+
+44
+00:02:06,620 --> 00:02:09,470
+if you remember your days of long division way back in grade school.
+
+45
+00:02:09,470 --> 00:02:11,270
+It&#39;s called the modulus operator.
+
+46
+00:02:11,270 --> 00:02:13,620
+What modulus does is it gives you the remainder
+
+47
+00:02:13,620 --> 00:02:15,400
+when you divide two numbers together.
+
+48
+00:02:15,400 --> 00:02:21,750
+So, if I say 13 divided by 4, what&#39;s the remainder?
+
+49
+00:02:21,750 --> 00:02:24,860
+And that value would be calculated by the modulus operator.
+
+50
+00:02:24,860 --> 00:02:28,320
+&gt;&gt; So, I have a line of code here, int m equals 13 mod 4.
+
+51
+00:02:28,320 --> 00:02:31,960
+And I say here in a comment that m&#39;s value is now 1.
+
+52
+00:02:31,960 --> 00:02:32,750
+Why do I say that?
+
+53
+00:02:32,750 --> 00:02:36,270
+Well, do the long division out in your head, if you bear with me for a second.
+
+54
+00:02:36,270 --> 00:02:40,070
+So, I have 4 divided by 13.
+
+55
+00:02:40,070 --> 00:02:44,087
+4 goes into 13 three times with a remainder of 1.
+
+56
+00:02:44,087 --> 00:02:45,920
+So, basically, all the modulus operator does
+
+57
+00:02:45,920 --> 00:02:48,600
+is it tells you when you divide, you get the remainder.
+
+58
+00:02:48,600 --> 00:02:51,420
+You might think that&#39;s actually not a terribly useful thing,
+
+59
+00:02:51,420 --> 00:02:54,350
+but you&#39;d be surprised, actually, by how frequently that modulus
+
+60
+00:02:54,350 --> 00:02:55,820
+operator can come in handy.
+
+61
+00:02:55,820 --> 00:02:58,420
+&gt;&gt; There&#39;s a couple of problems we&#39;ll do CS50 that deal with it.
+
+62
+00:02:58,420 --> 00:03:00,545
+It&#39;s also good for doing things like random number.
+
+63
+00:03:00,545 --> 00:03:03,850
+So, for example if you&#39;ve ever heard of a random number generator,
+
+64
+00:03:03,850 --> 00:03:06,620
+that&#39;s going to give you a number from 0 to some huge number.
+
+65
+00:03:06,620 --> 00:03:10,390
+But maybe you only really need a number from 0 to 20.
+
+66
+00:03:10,390 --> 00:03:13,425
+If you use the modulus operator on that giant number that
+
+67
+00:03:13,425 --> 00:03:17,080
+gets generated by the random number generator,
+
+68
+00:03:17,080 --> 00:03:20,230
+you&#39;re going to take whatever huge value it is, divide it by 20,
+
+69
+00:03:20,230 --> 00:03:21,210
+and get the remainder.
+
+70
+00:03:21,210 --> 00:03:24,050
+The remainder can only be a value from 0 to 19.
+
+71
+00:03:24,050 --> 00:03:27,140
+So, you use modulus operator to take this huge number
+
+72
+00:03:27,140 --> 00:03:29,640
+and whittle it down into something a little more meaningful.
+
+73
+00:03:29,640 --> 00:03:31,764
+I&#39;m pretty sure you&#39;ll be able to use both of those
+
+74
+00:03:31,764 --> 00:03:34,710
+at some point in the future in CS50.
+
+75
+00:03:34,710 --> 00:03:37,030
+&gt;&gt; So, C also gives us a way to apply an arithmetic
+
+76
+00:03:37,030 --> 00:03:39,910
+operator to a single variable in a little more shorthand way.
+
+77
+00:03:39,910 --> 00:03:44,520
+So, in the previous slide, we saw x equals x times 5.
+
+78
+00:03:44,520 --> 00:03:45,260
+That worked.
+
+79
+00:03:45,260 --> 00:03:47,660
+x times 5 then gets stored back in x.
+
+80
+00:03:47,660 --> 00:03:52,490
+There&#39;s a shorter way to do it, thought, and it&#39;s the syntax x times equals 5.
+
+81
+00:03:52,490 --> 00:03:55,020
+It&#39;s the same exact thing as saying x equals x times 5.
+
+82
+00:03:55,020 --> 00:03:56,824
+It&#39;s just a slightly shorter way to do it.
+
+83
+00:03:56,824 --> 00:03:58,740
+And when you see some distribution code or you
+
+84
+00:03:58,740 --> 00:04:01,287
+see some sample code that does things like this,
+
+85
+00:04:01,287 --> 00:04:03,120
+just be familiar with what the syntax means.
+
+86
+00:04:03,120 --> 00:04:05,980
+You certainly don&#39;t have to use it, but if you do,
+
+87
+00:04:05,980 --> 00:04:08,235
+it might make your code look a little slicker.
+
+88
+00:04:08,235 --> 00:04:11,360
+And know that you can also use any of the different operators we&#39;ve already
+
+89
+00:04:11,360 --> 00:04:12,660
+seen before instead of times.
+
+90
+00:04:12,660 --> 00:04:16,720
+You could say x plus equals 5, minus equals 5, times, divide, and mod.
+
+91
+00:04:16,720 --> 00:04:18,959
+All of those work.
+
+92
+00:04:18,959 --> 00:04:21,089
+&gt;&gt; There&#39;s also something that&#39;s so common in C
+
+93
+00:04:21,089 --> 00:04:24,080
+that we&#39;ve decided to refine that even further.
+
+94
+00:04:24,080 --> 00:04:26,916
+Incrementing a variable by 1 or decrementing a variable by 1
+
+95
+00:04:26,916 --> 00:04:30,040
+is such a common thing-- especially when we talk about loops a little later
+
+96
+00:04:30,040 --> 00:04:35,240
+on-- that we&#39;ve decided instead of saying something like x plus equals 1,
+
+97
+00:04:35,240 --> 00:04:40,190
+or x equals x plus 1, we&#39;ve even short handed that to x plus plus.
+
+98
+00:04:40,190 --> 00:04:46,940
+So, x equals x plus 1, x plus equals 1, and x plus plus all do the same thing.
+
+99
+00:04:46,940 --> 00:04:48,470
+They all increment x by 1.
+
+100
+00:04:48,470 --> 00:04:50,630
+But that incrementing and decrementing by 1
+
+101
+00:04:50,630 --> 00:04:54,110
+is so common that we have plus plus and minus minus
+
+102
+00:04:54,110 --> 00:04:59,140
+that allow us to shorthand that even further.
+
+103
+00:04:59,140 --> 00:05:02,110
+&gt;&gt; So, let&#39;s switch gears for second and talk about Boolean expressions.
+
+104
+00:05:02,110 --> 00:05:06,340
+All which are also kind of fall into the overall category of operators.
+
+105
+00:05:06,340 --> 00:05:09,030
+But Boolean expressions, unlike arithmetic operators,
+
+106
+00:05:09,030 --> 00:05:11,860
+are used for comparing values.
+
+107
+00:05:11,860 --> 00:05:15,550
+So, again, all Boolean expressions in C evaluate to one of two possible values,
+
+108
+00:05:15,550 --> 00:05:16,050
+recall.
+
+109
+00:05:16,050 --> 00:05:17,740
+True or false.
+
+110
+00:05:17,740 --> 00:05:21,880
+That&#39;s the only two values that Boolean variable can take on.
+
+111
+00:05:21,880 --> 00:05:25,780
+We can use the results of a Boolean expression
+
+112
+00:05:25,780 --> 00:05:27,650
+in a lot of ways in programming.
+
+113
+00:05:27,650 --> 00:05:29,400
+In fact, you&#39;ll be doing this quite a lot.
+
+114
+00:05:29,400 --> 00:05:32,870
+&gt;&gt; For example, we might decide, well, if some condition is true,
+
+115
+00:05:32,870 --> 00:05:34,665
+maybe I&#39;ll take this branch down my code.
+
+116
+00:05:34,665 --> 00:05:35,980
+A conditional, so to speak.
+
+117
+00:05:35,980 --> 00:05:37,970
+We&#39;ll learn about those soon too.
+
+118
+00:05:37,970 --> 00:05:40,560
+Or maybe, as long as this is true, I want
+
+119
+00:05:40,560 --> 00:05:42,790
+to keep doing this over and over and over.
+
+120
+00:05:42,790 --> 00:05:43,480
+A loop.
+
+121
+00:05:43,480 --> 00:05:48,350
+In both cases, know that we&#39;re using a Boolean expression, a true or false,
+
+122
+00:05:48,350 --> 00:05:52,411
+to decide whether or not to take a particular path.
+
+123
+00:05:52,411 --> 00:05:54,660
+Sometimes when we&#39;re working with Boolean expressions,
+
+124
+00:05:54,660 --> 00:05:56,410
+we will use variables of type Bool.
+
+125
+00:05:56,410 --> 00:05:58,461
+You might have declared a Bool typed variable,
+
+126
+00:05:58,461 --> 00:06:00,210
+and you&#39;ll use in your Boolean expression.
+
+127
+00:06:00,210 --> 00:06:02,130
+But you don&#39;t always have to do.
+
+128
+00:06:02,130 --> 00:06:06,690
+As it turns out, in C, every non-0 value is the same as saying true.
+
+129
+00:06:06,690 --> 00:06:10,680
+If you had declared a variable of type Boolean,
+
+130
+00:06:10,680 --> 00:06:14,240
+and assigned it the value true, that&#39;s the same as declaring an integer
+
+131
+00:06:14,240 --> 00:06:17,410
+and assigning it the value 1, 2, 3, or really any value
+
+132
+00:06:17,410 --> 00:06:19,580
+whatsoever other than 0.
+
+133
+00:06:19,580 --> 00:06:22,690
+Because in C, every non-0 value is true.
+
+134
+00:06:22,690 --> 00:06:24,820
+0, on the other hand, is false.
+
+135
+00:06:24,820 --> 00:06:27,162
+This might come in handy later on to know,
+
+136
+00:06:27,162 --> 00:06:28,620
+but just something to keep in mind.
+
+137
+00:06:28,620 --> 00:06:31,890
+We don&#39;t always have to use Boolean type variables when we
+
+138
+00:06:31,890 --> 00:06:34,980
+are working with Boolean expressions.
+
+139
+00:06:34,980 --> 00:06:37,890
+&gt;&gt; There are two main types of Boolean expressions that we&#39;ll work with.
+
+140
+00:06:37,890 --> 00:06:40,640
+Logical operators and relational operators.
+
+141
+00:06:40,640 --> 00:06:42,640
+The language there is not terribly important.
+
+142
+00:06:42,640 --> 00:06:44,970
+It&#39;s really just how I&#39;m grouping them.
+
+143
+00:06:44,970 --> 00:06:49,222
+And you&#39;ll certainly, I think, quickly realize what a relational operator is,
+
+144
+00:06:49,222 --> 00:06:51,680
+based on what they are when we talk about them in a second.
+
+145
+00:06:51,680 --> 00:06:54,250
+But don&#39;t worry about necessarily memorizing the term logical operator
+
+146
+00:06:54,250 --> 00:06:55,460
+or relational operator.
+
+147
+00:06:55,460 --> 00:07:00,070
+I&#39;m just using it to group them in a logical way.
+
+148
+00:07:00,070 --> 00:07:02,620
+&gt;&gt; So, let&#39;s take a look at the three logical operators
+
+149
+00:07:02,620 --> 00:07:04,970
+that we&#39;ll see quite a bit in programming in CS50
+
+150
+00:07:04,970 --> 00:07:06,710
+and in programming more generally.
+
+151
+00:07:06,710 --> 00:07:10,470
+Logical AND is true, if and only if both operands are true.
+
+152
+00:07:10,470 --> 00:07:11,775
+Otherwise false.
+
+153
+00:07:11,775 --> 00:07:12,650
+Where does that mean?
+
+154
+00:07:12,650 --> 00:07:15,840
+So, let&#39;s say that I am at a point in my code where I have
+
+155
+00:07:15,840 --> 00:07:18,310
+two variables, x and y.
+
+156
+00:07:18,310 --> 00:07:21,620
+And I want to decide whether to do something in my code
+
+157
+00:07:21,620 --> 00:07:25,780
+based on if x is true and y is true.
+
+158
+00:07:25,780 --> 00:07:27,730
+I only want to do it if both of them are true,
+
+159
+00:07:27,730 --> 00:07:30,980
+otherwise I don&#39;t want to go down that path because it&#39;s not going to help me.
+
+160
+00:07:30,980 --> 00:07:37,420
+What I can say is if x &amp; &amp; y.
+
+161
+00:07:37,420 --> 00:07:42,380
+That will be a logical Boolean expression comparing x and y
+
+162
+00:07:42,380 --> 00:07:45,240
+and taking a certain path based on what their values are.
+
+163
+00:07:45,240 --> 00:07:48,400
+So, if x is true and y is true based on this truth table here,
+
+164
+00:07:48,400 --> 00:07:50,430
+only then will we go down that path.
+
+165
+00:07:50,430 --> 00:07:52,940
+If x, &amp; &amp; y.
+
+166
+00:07:52,940 --> 00:07:58,320
+It&#39;s only true-- the and is only true if x is true and y is true.
+
+167
+00:07:58,320 --> 00:08:00,850
+If either one is false, as we see the truth table,
+
+168
+00:08:00,850 --> 00:08:02,370
+then both x and y are not true.
+
+169
+00:08:02,370 --> 00:08:07,660
+And so, x &amp; &amp; y is false.
+
+170
+00:08:07,660 --> 00:08:12,044
+&gt;&gt; Logical OR is true if and only if at least one operand is true.
+
+171
+00:08:12,044 --> 00:08:12,710
+Otherwise false.
+
+172
+00:08:12,710 --> 00:08:15,760
+So logical AND required both x and y to be true.
+
+173
+00:08:15,760 --> 00:08:21,185
+Logical OR requires x to be true or y to be true or both x and y to be true.
+
+174
+00:08:21,185 --> 00:08:23,310
+So, again, we kind of find ourselves in a situation
+
+175
+00:08:23,310 --> 00:08:26,460
+where we&#39;re going to our code, and we reached a fork in the road.
+
+176
+00:08:26,460 --> 00:08:29,850
+And we want to go down a particular path if x is true
+
+177
+00:08:29,850 --> 00:08:33,299
+or y is true, but not necessarily if both are true.
+
+178
+00:08:33,299 --> 00:08:35,830
+But possibly if both are true.
+
+179
+00:08:35,830 --> 00:08:38,460
+So if x is true and y is true, we&#39;ll go down that path.
+
+180
+00:08:38,460 --> 00:08:39,066
+x is true.
+
+181
+00:08:39,066 --> 00:08:40,190
+One of them is true, right?
+
+182
+00:08:40,190 --> 00:08:42,080
+If x is true and y is true.
+
+183
+00:08:42,080 --> 00:08:44,910
+If x is true, and y is false, one of them is still true.
+
+184
+00:08:44,910 --> 00:08:48,020
+So, x or y is still true.
+
+185
+00:08:48,020 --> 00:08:52,290
+If x is false, and y is true, one of them is still true, right?
+
+186
+00:08:52,290 --> 00:08:53,290
+y is true, in this case.
+
+187
+00:08:53,290 --> 00:08:57,950
+So, it&#39;s true that x or y is true.
+
+188
+00:08:57,950 --> 00:09:02,620
+Only if x is false and y is false do we not go down that path,
+
+189
+00:09:02,620 --> 00:09:04,454
+because neither x nor y is true.
+
+190
+00:09:04,454 --> 00:09:06,370
+Now, if you&#39;re looking at the screen right now
+
+191
+00:09:06,370 --> 00:09:09,062
+and wondering what that symbol is for logical OR,
+
+192
+00:09:09,062 --> 00:09:10,270
+it&#39;s called the vertical bar.
+
+193
+00:09:10,270 --> 00:09:13,730
+And if you looking at your keyboard for a minute, as I&#39;m doing now,
+
+194
+00:09:13,730 --> 00:09:16,940
+it&#39;s usually just above the Enter key, on most keyboards,
+
+195
+00:09:16,940 --> 00:09:19,630
+on the same key as the backslash.
+
+196
+00:09:19,630 --> 00:09:22,790
+It&#39;s also usually right next to the square brackets.
+
+197
+00:09:22,790 --> 00:09:27,240
+So, it might be a key that you haven&#39;t typed very much in the past.
+
+198
+00:09:27,240 --> 00:09:29,700
+But, if you&#39;re ever doing logical comparisons,
+
+199
+00:09:29,700 --> 00:09:31,882
+as we&#39;ll be doing a lot in the course, it&#39;s
+
+200
+00:09:31,882 --> 00:09:33,840
+going to be useful to find that key and use it.
+
+201
+00:09:33,840 --> 00:09:38,340
+So, it&#39;s usually on the same key as backslash just above Enter.
+
+202
+00:09:38,340 --> 00:09:39,757
+&gt;&gt; The final logical operator is NOT.
+
+203
+00:09:39,757 --> 00:09:41,131
+And NOT&#39;s pretty straightforward.
+
+204
+00:09:41,131 --> 00:09:42,830
+It inverts the value of its operand.
+
+205
+00:09:42,830 --> 00:09:46,080
+If x is true, then not x is false.
+
+206
+00:09:46,080 --> 00:09:49,960
+If x is false, then not x is true.
+
+207
+00:09:49,960 --> 00:09:53,850
+Sometimes you&#39;ll hear this symbol pronounced as bang or exclamation
+
+208
+00:09:53,850 --> 00:09:55,231
+or not.
+
+209
+00:09:55,231 --> 00:09:56,730
+It&#39;s pretty much all the same thing.
+
+210
+00:09:56,730 --> 00:10:00,185
+In case you hear that spoken and you&#39;re not sure what that means,
+
+211
+00:10:00,185 --> 00:10:02,310
+it&#39;s just the exclamation point, but sometimes it&#39;s
+
+212
+00:10:02,310 --> 00:10:04,215
+called a couple different things.
+
+213
+00:10:04,215 --> 00:10:06,340
+All right, so that takes care of logical operators.
+
+214
+00:10:06,340 --> 00:10:08,640
+So, let&#39;s talk about relational operators.
+
+215
+00:10:08,640 --> 00:10:11,610
+Again, if you&#39;re familiar with this arithmetic back in grade school,
+
+216
+00:10:11,610 --> 00:10:13,870
+you&#39;re probably familiar with how these work already.
+
+217
+00:10:13,870 --> 00:10:15,411
+These behave exactly as you&#39;d expect.
+
+218
+00:10:15,411 --> 00:10:19,800
+So less than it&#39;s true, in this example, if x is less than y.
+
+219
+00:10:19,800 --> 00:10:24,380
+So, if x is 4 and y is 6, x is less than y.
+
+220
+00:10:24,380 --> 00:10:26,035
+That&#39;s true.
+
+221
+00:10:26,035 --> 00:10:27,910
+Less than or equal to works pretty similarly.
+
+222
+00:10:27,910 --> 00:10:33,020
+If x is 4, and y is 4, then x is less than or equal to y.
+
+223
+00:10:33,020 --> 00:10:35,310
+Greater than. x is greater than y.
+
+224
+00:10:35,310 --> 00:10:39,310
+And greater than or equal to, x is greater than or equal to y.
+
+225
+00:10:39,310 --> 00:10:41,745
+If it&#39;s true, then you&#39;ll pass that expression,
+
+226
+00:10:41,745 --> 00:10:44,490
+and you&#39;ll go down that path on the road.
+
+227
+00:10:44,490 --> 00:10:48,590
+If you have an if x is greater than y, and x is, in fact, is greater than y,
+
+228
+00:10:48,590 --> 00:10:51,670
+you&#39;ll do whatever is subject to that condition.
+
+229
+00:10:51,670 --> 00:10:54,396
+&gt;&gt; Notice that we don&#39;t have a single character for less than
+
+230
+00:10:54,396 --> 00:10:57,020
+or equal to, as you might be familiar with from math textbooks.
+
+231
+00:10:57,020 --> 00:10:59,874
+So, we have the less than symbol, followed by an equal sign.
+
+232
+00:10:59,874 --> 00:11:01,790
+That&#39;s how we represent less than or equal to.
+
+233
+00:11:01,790 --> 00:11:04,490
+And similarly, do we do that for greater than or equal to.
+
+234
+00:11:04,490 --> 00:11:06,698
+&gt;&gt; The final two relational operators that are important
+
+235
+00:11:06,698 --> 00:11:09,320
+are testing for equality and inequality.
+
+236
+00:11:09,320 --> 00:11:13,380
+So, if x equals equals y, is true if x and y&#39;s value is the same.
+
+237
+00:11:13,380 --> 00:11:19,610
+If x is 10, and y is 10, then x equals equals y is true.
+
+238
+00:11:19,610 --> 00:11:26,010
+If x is 10 and y is 11, x equals equals y is not true.
+
+239
+00:11:26,010 --> 00:11:29,680
+We can also test for inequality using exclamation point or bang or NOT,
+
+240
+00:11:29,680 --> 00:11:30,330
+again.
+
+241
+00:11:30,330 --> 00:11:35,049
+If x is not equal to y, if that&#39;s the test we&#39;re using here,
+
+242
+00:11:35,049 --> 00:11:35,840
+we&#39;d be good to go.
+
+243
+00:11:35,840 --> 00:11:40,340
+So, if x is not equal to y, we&#39;ll go down that path.
+
+244
+00:11:40,340 --> 00:11:41,441
+&gt;&gt; Be really careful here.
+
+245
+00:11:41,441 --> 00:11:44,440
+It&#39;s a really common mistake-- and one I certainly made quite a lot when
+
+246
+00:11:44,440 --> 00:11:47,340
+I was getting started-- to accidentally mistake
+
+247
+00:11:47,340 --> 00:11:51,690
+the assignment operator, single equals, for the equality comparison operator,
+
+248
+00:11:51,690 --> 00:11:52,582
+double equals.
+
+249
+00:11:52,582 --> 00:11:54,540
+It&#39;ll lead to some weird behavior in your code,
+
+250
+00:11:54,540 --> 00:11:56,730
+and usually the compiler will warn you about it when you try
+
+251
+00:11:56,730 --> 00:11:59,910
+and compile your code, but sometimes you might be able to sneak it by.
+
+252
+00:11:59,910 --> 00:12:02,770
+It&#39;s not necessarily a good thing that you sneak it by, though.
+
+253
+00:12:02,770 --> 00:12:04,710
+Just so if you are doing an inequality test,
+
+254
+00:12:04,710 --> 00:12:07,970
+if you&#39;re checking whether two different variables have the same value
+
+255
+00:12:07,970 --> 00:12:11,980
+inside of them, make sure to use equals equals, and not single equals.
+
+256
+00:12:11,980 --> 00:12:15,450
+And that way your program will have the behavior you intend.
+
+257
+00:12:15,450 --> 00:12:18,400
+I&#39;m Doug Lloyd and this is CS50.
+

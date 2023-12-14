@@ -1,6 +1,9 @@
 import requests
-import concurrent.futures
+import concurrent.futures   # 导入 concurrent.futures 模块
+import os
 
+
+# 函数使用 DeepL API 翻译文本
 def translate_text_with_deepl(text, target_language='ZH', auth_key='3e89eafc-299b-f3cc-c3b2-19c97a8de024'):
     url = "https://api.deepl.com/v2/translate"
     data = {
@@ -11,6 +14,8 @@ def translate_text_with_deepl(text, target_language='ZH', auth_key='3e89eafc-299
     response = requests.post(url, data=data)
     return response.json()['translations'][0]['text']
 
+
+# 函数解析 SRT 文件并返回一个列表，其中包含每个条目的元组
 def parse_srt(srt_content):
     entries = []
     current_entry = []
@@ -36,6 +41,8 @@ def parse_srt(srt_content):
 
     return entries
 
+
+# 函数生成新的 SRT 文件内容
 def generate_new_srt(translated_entries):
     new_srt_content = ''
     for entry in translated_entries:
@@ -43,7 +50,8 @@ def generate_new_srt(translated_entries):
     return new_srt_content
 
 # 读取原始字幕文件
-with open('/Users/loyo/PycharmProjects/TranslateSubtitles/src/2022_fall_section1-720p-en.srt', 'r', encoding='utf-8') as file:
+input_file_path = '/Users/loyo/PycharmProjects/TranslateSubtitles/src/data_types-720p-en.srt'
+with open(input_file_path, 'r', encoding='utf-8') as file:
     original_srt_content = file.read()
 
 
@@ -54,11 +62,13 @@ parsed_entries = parse_srt(original_srt_content)
 translated_entries = []
 total_entries = len(parsed_entries)
 
+
+# 函数使用 DeepL API 翻译文本
 def translate_entry(entry):
     return (entry[0], entry[1], translate_text_with_deepl(entry[2]))
 
 # 使用 ThreadPoolExecutor 并行处理翻译
-with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:  # 您可以根据需要调整 max_workers
+with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:  # 您可以根据需要调整 max_workers
     for index, result in enumerate(executor.map(translate_entry, parsed_entries)):
         translated_entries.append(result)
         print(f"Progress: {index + 1}/{total_entries} entries translated")
@@ -67,6 +77,11 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:  # 您�
 # 生成新的字幕文件
 new_srt_content = generate_new_srt(translated_entries)
 
+# 提取原始文件名并在其后添加 "_cn"
+base_name = os.path.basename(input_file_path)
+name, ext = os.path.splitext(base_name)
+output_filename = name.replace("-en", "-cn") + ext
+
 # 保存翻译后的字幕文件
-with open('path_to_translated_srt_file.srt', 'w', encoding='utf-8') as file:
+with open(output_filename, 'w', encoding='utf-8') as file:
     file.write(new_srt_content)
