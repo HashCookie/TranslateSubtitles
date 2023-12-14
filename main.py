@@ -1,10 +1,8 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox
-import concurrent.futures
 import requests
+import concurrent.futures
 
-def translate_text_with_deepl(text, target_language='ZH', auth_key='1c9b9545-c3ac-7d1e-1fa5-aca070eb189d:fx'):
-    url = "https://api-free.deepl.com/v2/translate"
+def translate_text_with_deepl(text, target_language='ZH', auth_key='3e89eafc-299b-f3cc-c3b2-19c97a8de024'):
+    url = "https://api.deepl.com/v2/translate"
     data = {
         'auth_key': auth_key,
         'text': text,
@@ -45,7 +43,7 @@ def generate_new_srt(translated_entries):
     return new_srt_content
 
 # 读取原始字幕文件
-with open('/Users/loyo/PycharmProjects/TranslateSubtitles/src/2022_lecture1_720p_sdr-en.srt', 'r', encoding='utf-8') as file:
+with open('/Users/loyo/PycharmProjects/TranslateSubtitles/src/2022_fall_section1-720p-en.srt', 'r', encoding='utf-8') as file:
     original_srt_content = file.read()
 
 
@@ -60,10 +58,11 @@ def translate_entry(entry):
     return (entry[0], entry[1], translate_text_with_deepl(entry[2]))
 
 # 使用 ThreadPoolExecutor 并行处理翻译
-with concurrent.futures.ThreadPoolExecutor() as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:  # 您可以根据需要调整 max_workers
     for index, result in enumerate(executor.map(translate_entry, parsed_entries)):
         translated_entries.append(result)
         print(f"Progress: {index + 1}/{total_entries} entries translated")
+
 
 # 生成新的字幕文件
 new_srt_content = generate_new_srt(translated_entries)
