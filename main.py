@@ -4,7 +4,7 @@ import os
 
 
 # 函数使用 DeepL API 翻译文本
-def translate_text_with_deepl(text, target_language='ZH', auth_key='3e89eafc-299b-f3cc-c3b2-19c97a8de024'):
+def translate_text_with_deepl(text, target_language='ZH', auth_key='3688cca9-ad8f-2ab9-05ed-9a78de7aa541'):
     url = "https://api.deepl.com/v2/translate"
     data = {
         'auth_key': auth_key,
@@ -50,7 +50,7 @@ def generate_new_srt(translated_entries):
     return new_srt_content
 
 # 读取原始字幕文件
-input_file_path = '/Users/loyo/PycharmProjects/TranslateSubtitles/src/data_types-720p-en.srt'
+input_file_path = '/Users/loyo/PycharmProjects/TranslateSubtitles/src/week4/2022_lecture4_720p_sdr-en.srt'
 with open(input_file_path, 'r', encoding='utf-8') as file:
     original_srt_content = file.read()
 

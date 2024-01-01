@@ -1,0 +1,976 @@
+0
+00:00:00,000 --> 00:00:03,227
+[MUSIC PLAYING]
+
+1
+00:00:03,227 --> 00:00:04,565
+
+
+2
+00:00:04,565 --> 00:00:06,440
+DOUG LLOYD: All right, so by now we've talked
+
+3
+00:00:06,440 --> 00:00:09,445
+about a couple of different sorting algorithms that
+
+4
+00:00:09,445 --> 00:00:11,570
+are pretty straightforward to work with, hopefully.
+
+5
+00:00:11,570 --> 00:00:14,299
+We've got bubble sort, insertion sort, and selection sort.
+
+6
+00:00:14,299 --> 00:00:16,340
+And what we do know is what all of have in common
+
+7
+00:00:16,340 --> 00:00:21,560
+is that they have a sort of worst case scenario runtime of n squared.
+
+8
+00:00:21,560 --> 00:00:23,430
+Can we do any better than that?
+
+9
+00:00:23,430 --> 00:00:25,580
+Well, the answer happens to be yes, we can,
+
+10
+00:00:25,580 --> 00:00:28,580
+using an algorithm called merge sort.
+
+11
+00:00:28,580 --> 00:00:32,240
+Now in merge sort, the idea is to sort smaller arrays
+
+12
+00:00:32,240 --> 00:00:35,730
+and then combine those arrays together or merge them,
+
+13
+00:00:35,730 --> 00:00:38,970
+as in the name of the algorithm itself, in sorted order.
+
+14
+00:00:38,970 --> 00:00:42,850
+So instead of having to think about, we have one six-element array,
+
+15
+00:00:42,850 --> 00:00:46,029
+let's think instead that we have six one-element arrays,
+
+16
+00:00:46,029 --> 00:00:48,320
+and then let's just recombine them in the correct order
+
+17
+00:00:48,320 --> 00:00:49,880
+and merge them together.
+
+18
+00:00:49,880 --> 00:00:51,287
+That would be one way to sort it.
+
+19
+00:00:51,287 --> 00:00:52,620
+And that's what merge sort does.
+
+20
+00:00:52,620 --> 00:00:56,180
+And it leverages something called recursion, which
+
+21
+00:00:56,180 --> 00:00:58,890
+we'll talk about soon in another video.
+
+22
+00:00:58,890 --> 00:01:01,919
+And if you want to get a better understanding of how recursion works,
+
+23
+00:01:01,919 --> 00:01:03,710
+you might want to take a look at that video
+
+24
+00:01:03,710 --> 00:01:06,470
+before coming and watching this one, because this is going
+
+25
+00:01:06,470 --> 00:01:09,800
+to talk about recursion quite a bit.
+
+26
+00:01:09,800 --> 00:01:12,084
+Merge sort is definitely the most complicated
+
+27
+00:01:12,084 --> 00:01:14,750
+of the four different types of sorts that we cover in the class.
+
+28
+00:01:14,750 --> 00:01:16,550
+And so I'm going to go through this one a little more slowly
+
+29
+00:01:16,550 --> 00:01:17,720
+than the other ones.
+
+30
+00:01:17,720 --> 00:01:22,192
+But the algorithm for merge sort itself is actually pretty few steps.
+
+31
+00:01:22,192 --> 00:01:23,900
+We're basically going to say, we're going
+
+32
+00:01:23,900 --> 00:01:28,750
+to sort the left half of the array, sort the right half of the array,
+
+33
+00:01:28,750 --> 00:01:30,430
+and then merge the two halves together.
+
+34
+00:01:30,430 --> 00:01:33,877
+That is fundamentally what merge sort is all about.
+
+35
+00:01:33,877 --> 00:01:36,460
+Of course, in practice, it's a little more detailed than that,
+
+36
+00:01:36,460 --> 00:01:37,709
+but let's go through that now.
+
+37
+00:01:37,709 --> 00:01:42,490
+So here's the same six-element array we've been sorting all the time.
+
+38
+00:01:42,490 --> 00:01:45,500
+And we're going to start to follow our steps of pseudocode,
+
+39
+00:01:45,500 --> 00:01:49,640
+which is we want to sort the left half of this brick red array.
+
+40
+00:01:49,640 --> 00:01:51,940
+So we're just going to focus on this part for now.
+
+41
+00:01:51,940 --> 00:01:53,290
+And actually, just to make things a little bit easier,
+
+42
+00:01:53,290 --> 00:01:55,759
+and because I've colored different things in different ways
+
+43
+00:01:55,759 --> 00:01:57,550
+throughout this video, we're going to refer
+
+44
+00:01:57,550 --> 00:02:02,110
+to this half of the array, this left half of the overall red array,
+
+45
+00:02:02,110 --> 00:02:05,890
+from this point forward, this is the purple half of the array.
+
+46
+00:02:05,890 --> 00:02:07,120
+All right?
+
+47
+00:02:07,120 --> 00:02:09,970
+So we are now in the middle of sorting the left half of the array.
+
+48
+00:02:09,970 --> 00:02:12,200
+But we don't know how to do that.
+
+49
+00:02:12,200 --> 00:02:14,600
+We don't know how to sort the left half of the array.
+
+50
+00:02:14,600 --> 00:02:17,460
+So why don't we just go back to our merge sort steps again?
+
+51
+00:02:17,460 --> 00:02:19,180
+All right, well, if I don't know how to sort the left half of the array,
+
+52
+00:02:19,180 --> 00:02:20,429
+I'm just going to start again.
+
+53
+00:02:20,429 --> 00:02:22,310
+Sort the left half of this array.
+
+54
+00:02:22,310 --> 00:02:25,236
+Now I just want to focus on this part of the array, the left half.
+
+55
+00:02:25,236 --> 00:02:27,610
+And I'm sort of arbitrarily deciding that my left half is
+
+56
+00:02:27,610 --> 00:02:28,870
+going to be smaller than my right half.
+
+57
+00:02:28,870 --> 00:02:30,010
+I have three elements.
+
+58
+00:02:30,010 --> 00:02:31,140
+I can't divide it evenly.
+
+59
+00:02:31,140 --> 00:02:32,950
+I can't have one and 1/2 elements on each side.
+
+60
+00:02:32,950 --> 00:02:35,960
+So as long as I'm consistent, as long as I always choose, in this case,
+
+61
+00:02:35,960 --> 00:02:40,130
+the left side is smaller, that will be fine for merge sort's purposes.
+
+62
+00:02:40,130 --> 00:02:43,840
+So now I'm left with this single element, this five.
+
+63
+00:02:43,840 --> 00:02:46,360
+How do I sort a one-element array?
+
+64
+00:02:46,360 --> 00:02:49,270
+Well, the good news here is I actually don't have to sort it at all.
+
+65
+00:02:49,270 --> 00:02:52,900
+A single-element array must necessarily be sorted.
+
+66
+00:02:52,900 --> 00:02:56,380
+So I can say that if I'm sorting the left half of the purple part,
+
+67
+00:02:56,380 --> 00:02:57,470
+that is sorted.
+
+68
+00:02:57,470 --> 00:03:00,770
+So we're just going to call that sorted and set it aside for now.
+
+69
+00:03:00,770 --> 00:03:04,870
+So now I want to go back to the right half of the purple part.
+
+70
+00:03:04,870 --> 00:03:07,150
+That's this.
+
+71
+00:03:07,150 --> 00:03:10,750
+How do I sort this array, this sub-array?
+
+72
+00:03:10,750 --> 00:03:12,490
+Let's just go back to our steps again.
+
+73
+00:03:12,490 --> 00:03:14,680
+I want to sort the left half only.
+
+74
+00:03:14,680 --> 00:03:15,820
+The left half is now two.
+
+75
+00:03:15,820 --> 00:03:16,780
+It's a single element.
+
+76
+00:03:16,780 --> 00:03:18,530
+I know how to sort a single element.
+
+77
+00:03:18,530 --> 00:03:22,480
+So I've sorted the left half of this, the left half
+
+78
+00:03:22,480 --> 00:03:25,270
+of the right half of the purple.
+
+79
+00:03:25,270 --> 00:03:26,480
+That's where we are.
+
+80
+00:03:26,480 --> 00:03:27,580
+That's sorted.
+
+81
+00:03:27,580 --> 00:03:31,030
+Now I go back and sort the right half of the left half
+
+82
+00:03:31,030 --> 00:03:33,001
+of the purple, which is the one.
+
+83
+00:03:33,001 --> 00:03:34,000
+One is a single element.
+
+84
+00:03:34,000 --> 00:03:35,041
+It's really easy to sort.
+
+85
+00:03:35,041 --> 00:03:36,910
+It's in sorted position.
+
+86
+00:03:36,910 --> 00:03:39,850
+Now is the first time I finally get to this third step of merge sort,
+
+87
+00:03:39,850 --> 00:03:42,230
+where I merge the two halves together.
+
+88
+00:03:42,230 --> 00:03:46,750
+So here, what I have to do is consider these two light green halves.
+
+89
+00:03:46,750 --> 00:03:51,850
+And I have to decide which one has the lower element.
+
+90
+00:03:51,850 --> 00:03:53,990
+In this case, it's one.
+
+91
+00:03:53,990 --> 00:03:56,470
+So what I do is I take the one and I put it
+
+92
+00:03:56,470 --> 00:03:59,890
+in the first position of some new hypothetical array.
+
+93
+00:03:59,890 --> 00:04:03,820
+Then I compare the two against nothing, and I ask which one is lower.
+
+94
+00:04:03,820 --> 00:04:04,750
+Well, two or nothing.
+
+95
+00:04:04,750 --> 00:04:06,970
+What's lower is two.
+
+96
+00:04:06,970 --> 00:04:09,460
+So now let's reframe the picture, because if we remember
+
+97
+00:04:09,460 --> 00:04:11,830
+talking about recursion, we're only focusing
+
+98
+00:04:11,830 --> 00:04:14,830
+on the left half of the overall brick red array,
+
+99
+00:04:14,830 --> 00:04:17,500
+which we then called the purple array.
+
+100
+00:04:17,500 --> 00:04:20,950
+By this point in our steps, with respect to the purple array,
+
+101
+00:04:20,950 --> 00:04:24,160
+we have sorted the left half, which is five,
+
+102
+00:04:24,160 --> 00:04:26,682
+and the right half, which was originally two and one,
+
+103
+00:04:26,682 --> 00:04:28,390
+but now we have done these merging steps,
+
+104
+00:04:28,390 --> 00:04:30,440
+and we've got that in the correct order.
+
+105
+00:04:30,440 --> 00:04:33,774
+So now we are on step three for the entire purple array,
+
+106
+00:04:33,774 --> 00:04:36,190
+because we've already sort of the purple array's left half
+
+107
+00:04:36,190 --> 00:04:38,470
+and the purple array's right half.
+
+108
+00:04:38,470 --> 00:04:41,890
+So now we need to merge these two halves together.
+
+109
+00:04:41,890 --> 00:04:46,390
+And just like we did a second ago with the two and the one,
+
+110
+00:04:46,390 --> 00:04:48,910
+we're going to compare the first element of the left part
+
+111
+00:04:48,910 --> 00:04:52,240
+and the first element of the right part and figure out which one is smaller,
+
+112
+00:04:52,240 --> 00:04:55,270
+and make that the first element of our new array.
+
+113
+00:04:55,270 --> 00:04:57,927
+So I compare five and one.
+
+114
+00:04:57,927 --> 00:04:59,260
+And I say, which one is smaller?
+
+115
+00:04:59,260 --> 00:05:02,110
+Well, it's one, so one becomes the first element
+
+116
+00:05:02,110 --> 00:05:04,630
+of this new three-element array.
+
+117
+00:05:04,630 --> 00:05:06,130
+Now I have to make another decision.
+
+118
+00:05:06,130 --> 00:05:09,310
+Is five lower, or is two lower?
+
+119
+00:05:09,310 --> 00:05:10,240
+Well, two is lower.
+
+120
+00:05:10,240 --> 00:05:14,560
+So two becomes the next element of our merging step.
+
+121
+00:05:14,560 --> 00:05:17,980
+Then I say, is five lower or is nothing lower?
+
+122
+00:05:17,980 --> 00:05:21,280
+Well, clearly, in this case, the only option I have left is five.
+
+123
+00:05:21,280 --> 00:05:24,010
+And so now, at this point in the process,
+
+124
+00:05:24,010 --> 00:05:27,130
+let's again think recursively about where we are.
+
+125
+00:05:27,130 --> 00:05:32,290
+We have sorted, for the entire red array, we have just done step one.
+
+126
+00:05:32,290 --> 00:05:34,810
+We have sorted the left portion.
+
+127
+00:05:34,810 --> 00:05:38,740
+We've done so recursively, but we have sorted the left portion
+
+128
+00:05:38,740 --> 00:05:40,960
+of the overall red array.
+
+129
+00:05:40,960 --> 00:05:43,300
+So we can kind of put this aside for now,
+
+130
+00:05:43,300 --> 00:05:46,570
+because now we have to go to the next step of the merge sort process, which
+
+131
+00:05:46,570 --> 00:05:49,340
+is to sort the right half of that red array.
+
+132
+00:05:49,340 --> 00:05:51,381
+So let's go over and focus on the right half.
+
+133
+00:05:51,381 --> 00:05:53,380
+We're going to go through exactly the same steps
+
+134
+00:05:53,380 --> 00:05:55,610
+that we just went through with the left part.
+
+135
+00:05:55,610 --> 00:05:58,990
+But now we're going to do it with this red part on the right.
+
+136
+00:05:58,990 --> 00:06:01,649
+So I want to sort the left half of this array.
+
+137
+00:06:01,649 --> 00:06:02,690
+Well, that's pretty easy.
+
+138
+00:06:02,690 --> 00:06:04,369
+I just arbitrarily again divide it.
+
+139
+00:06:04,369 --> 00:06:04,910
+I look at it.
+
+140
+00:06:04,910 --> 00:06:07,057
+I say, OK, well, three is a single element.
+
+141
+00:06:07,057 --> 00:06:08,890
+Single element is already sorted, so I don't
+
+142
+00:06:08,890 --> 00:06:10,389
+have to do anything, which is great.
+
+143
+00:06:10,389 --> 00:06:13,060
+I can just set that one aside and say, three is already sorted.
+
+144
+00:06:13,060 --> 00:06:16,300
+Now I want to sort the right half of the not so brick red,
+
+145
+00:06:16,300 --> 00:06:19,942
+but is still red, half of the array, which is this section.
+
+146
+00:06:19,942 --> 00:06:20,650
+How do I do this?
+
+147
+00:06:20,650 --> 00:06:21,980
+Well, it's more than one element.
+
+148
+00:06:21,980 --> 00:06:24,521
+So I'm going to go back to the beginning of my process again.
+
+149
+00:06:24,521 --> 00:06:26,450
+I'm going to sort the left half of that array.
+
+150
+00:06:26,450 --> 00:06:28,420
+So I look, and I say, here's the left half.
+
+151
+00:06:28,420 --> 00:06:28,930
+It's six.
+
+152
+00:06:28,930 --> 00:06:30,190
+It's already sorted.
+
+153
+00:06:30,190 --> 00:06:32,500
+Now I'm going to sort the right half of the array.
+
+154
+00:06:32,500 --> 00:06:33,250
+It's four.
+
+155
+00:06:33,250 --> 00:06:34,392
+It's already sorted.
+
+156
+00:06:34,392 --> 00:06:36,100
+Now I get to that merge step again, where
+
+157
+00:06:36,100 --> 00:06:38,590
+I have to again do these sort of side-by-side comparisons.
+
+158
+00:06:38,590 --> 00:06:39,730
+Which one is lower?
+
+159
+00:06:39,730 --> 00:06:42,041
+Is six lower, or is four lower?
+
+160
+00:06:42,041 --> 00:06:44,290
+Well, four is lower, so that becomes the first element
+
+161
+00:06:44,290 --> 00:06:46,887
+of our new merged little sub-array here.
+
+162
+00:06:46,887 --> 00:06:48,970
+And then I have to choose between six and nothing.
+
+163
+00:06:48,970 --> 00:06:51,640
+And I say, six is the lowest remaining.
+
+164
+00:06:51,640 --> 00:06:56,080
+So now I've sorted the left half of the right half.
+
+165
+00:06:56,080 --> 00:06:59,470
+And I've sorted the right half of the right half.
+
+166
+00:06:59,470 --> 00:07:03,470
+So now I want to merge those two portions together.
+
+167
+00:07:03,470 --> 00:07:05,720
+And again, we're going to do exactly the same process
+
+168
+00:07:05,720 --> 00:07:07,860
+that we did for the left portion.
+
+169
+00:07:07,860 --> 00:07:10,370
+I'm going to say, is three lower, or is four?
+
+170
+00:07:10,370 --> 00:07:12,020
+Well, it's three.
+
+171
+00:07:12,020 --> 00:07:14,559
+And then I'm going to say, is four lower, or is nothing?
+
+172
+00:07:14,559 --> 00:07:16,350
+There's nothing left on the left side, then
+
+173
+00:07:16,350 --> 00:07:18,350
+I must know that everything on the right has
+
+174
+00:07:18,350 --> 00:07:20,780
+to be bigger than everything that's in the merged array right now.
+
+175
+00:07:20,780 --> 00:07:23,613
+So instead of saying, OK, I'll put four in and then I'll put six in,
+
+176
+00:07:23,613 --> 00:07:26,900
+because the only thing left is on one side, everything must go.
+
+177
+00:07:26,900 --> 00:07:29,220
+So that all comes down.
+
+178
+00:07:29,220 --> 00:07:32,300
+And let's again take a second and think about where we are.
+
+179
+00:07:32,300 --> 00:07:35,610
+At this point, for the original brick red array that we started with,
+
+180
+00:07:35,610 --> 00:07:39,020
+we have gone through two of our pseudocode steps.
+
+181
+00:07:39,020 --> 00:07:42,860
+We've sort of the left half of that overall brick red array.
+
+182
+00:07:42,860 --> 00:07:46,250
+And we've sorted the right half of that overall brick red array.
+
+183
+00:07:46,250 --> 00:07:50,750
+And so now the final thing we have to do is merge those two halves together.
+
+184
+00:07:50,750 --> 00:07:55,430
+And just like before, we continue to ask ourselves the same question again.
+
+185
+00:07:55,430 --> 00:07:58,377
+Which is lower, one or three?
+
+186
+00:07:58,377 --> 00:08:01,460
+Notice the little black line there dividing the two halves to make it more
+
+187
+00:08:01,460 --> 00:08:02,360
+visually clear.
+
+188
+00:08:02,360 --> 00:08:04,960
+Which is lower, one or three?
+
+189
+00:08:04,960 --> 00:08:06,320
+Well, one is.
+
+190
+00:08:06,320 --> 00:08:10,220
+Now again I ask myself the question, which is lower, two or three?
+
+191
+00:08:10,220 --> 00:08:11,840
+That would be two.
+
+192
+00:08:11,840 --> 00:08:14,820
+Which is a lower, five or three?
+
+193
+00:08:14,820 --> 00:08:16,270
+That's three.
+
+194
+00:08:16,270 --> 00:08:17,570
+Five or four?
+
+195
+00:08:17,570 --> 00:08:18,790
+It's four.
+
+196
+00:08:18,790 --> 00:08:20,110
+Five or six.
+
+197
+00:08:20,110 --> 00:08:21,880
+It's five.
+
+198
+00:08:21,880 --> 00:08:23,660
+Six or nothing?
+
+199
+00:08:23,660 --> 00:08:24,621
+It's six.
+
+200
+00:08:24,621 --> 00:08:26,620
+And so by going through this process recursively
+
+201
+00:08:26,620 --> 00:08:29,680
+and breaking my problem down into smaller and smaller sub-arrays,
+
+202
+00:08:29,680 --> 00:08:33,130
+sorting those, merging them together, after a number of steps,
+
+203
+00:08:33,130 --> 00:08:34,570
+I have now completed my sort.
+
+204
+00:08:34,570 --> 00:08:36,840
+And I have everything in order here in dark blue.
+
+205
+00:08:36,840 --> 00:08:39,580
+One, two, three, four, five, six.
+
+206
+00:08:39,580 --> 00:08:42,610
+It's not necessarily as straightforward as something
+
+207
+00:08:42,610 --> 00:08:45,640
+like bubble sort, insertion sort, or selection sort.
+
+208
+00:08:45,640 --> 00:08:47,680
+But are there some advantages here?
+
+209
+00:08:47,680 --> 00:08:50,530
+Well, the answer is, yes, there are.
+
+210
+00:08:50,530 --> 00:08:54,520
+In the worst case scenario, we have to split up n elements.
+
+211
+00:08:54,520 --> 00:08:59,237
+And then we have to recombine them, effectively doubling the sorted arrays
+
+212
+00:08:59,237 --> 00:09:00,070
+as we build them up.
+
+213
+00:09:00,070 --> 00:09:03,194
+So we take two one-element arrays, and we turn it into a two-element array.
+
+214
+00:09:03,194 --> 00:09:05,309
+We take two two-element arrays.
+
+215
+00:09:05,309 --> 00:09:06,850
+We make it into a four-element array.
+
+216
+00:09:06,850 --> 00:09:09,160
+And so on and so on and so on as we go.
+
+217
+00:09:09,160 --> 00:09:13,114
+In the best case scenario, sort of like selection sort,
+
+218
+00:09:13,114 --> 00:09:15,280
+the array is already sorted, but we don't know this.
+
+219
+00:09:15,280 --> 00:09:17,920
+We don't know this until we split it and recombine it back with this algorithm.
+
+220
+00:09:17,920 --> 00:09:21,010
+There's no sort of shortcut here other than doing a search beforehand.
+
+221
+00:09:21,010 --> 00:09:23,920
+But that's going to add extra time as well.
+
+222
+00:09:23,920 --> 00:09:27,400
+So the result here is that we have n elements--
+
+223
+00:09:27,400 --> 00:09:31,330
+and we might have to combine them if we're doubling-- log n times.
+
+224
+00:09:31,330 --> 00:09:32,860
+Mathematically, that's how it works.
+
+225
+00:09:32,860 --> 00:09:35,000
+And so actually, unlike the other algorithms
+
+226
+00:09:35,000 --> 00:09:38,800
+we've covered, in the worst case scenario, the runtime of merge sort
+
+227
+00:09:38,800 --> 00:09:44,920
+is O of n log n, which in general is going to be less than or faster than n
+
+228
+00:09:44,920 --> 00:09:45,790
+squared.
+
+229
+00:09:45,790 --> 00:09:48,915
+In the best case scenario, because we still have to go through this process
+
+230
+00:09:48,915 --> 00:09:51,100
+again, it is still n log n.
+
+231
+00:09:51,100 --> 00:09:53,800
+So in the best case scenario, it can be slower than, say,
+
+232
+00:09:53,800 --> 00:09:56,299
+bubble sort, where the array happens to be perfectly sorted.
+
+233
+00:09:56,299 --> 00:10:00,190
+As you may recall the omega there is n, and not n log n.
+
+234
+00:10:00,190 --> 00:10:03,740
+But in the worst case or maybe even in an average case,
+
+235
+00:10:03,740 --> 00:10:06,850
+merge sort is actually going to be faster, at the expense of maybe taking
+
+236
+00:10:06,850 --> 00:10:09,130
+up more memory because we have to recombine and create
+
+237
+00:10:09,130 --> 00:10:12,160
+new segments in memory for our sub-arrays.
+
+238
+00:10:12,160 --> 00:10:15,800
+So merge sort is a really powerful tool to have in your toolbox
+
+239
+00:10:15,800 --> 00:10:19,240
+once you understand recursion, because it can make the speed of sorting
+
+240
+00:10:19,240 --> 00:10:22,200
+an array that much faster.
+
+241
+00:10:22,200 --> 00:10:23,290
+My name is Doug Lloyd.
+
+242
+00:10:23,290 --> 00:10:25,400
+This is CS50.
+
+243
+00:10:25,400 --> 00:10:27,030
+
+

@@ -1,0 +1,256 @@
+0
+00:00:00,000 --> 00:00:01,490
+SPEAKER 1: Welcome, everyone.
+
+1
+00:00:01,490 --> 00:00:02,350
+My name is Carter.
+
+2
+00:00:02,350 --> 00:00:04,683
+And today I'm going to show you my guessing game and how
+
+3
+00:00:04,683 --> 00:00:07,310
+I can use debug50 to help figure out what's wrong with it.
+
+4
+00:00:07,310 --> 00:00:09,520
+So here, I'm trying to write a guessing game that
+
+5
+00:00:09,520 --> 00:00:10,960
+is written in the spirit of the elementary school game
+
+6
+00:00:10,960 --> 00:00:13,377
+where you would guess a number and someone would tell you,
+
+7
+00:00:13,377 --> 00:00:14,211
+it's right or wrong.
+
+8
+00:00:14,211 --> 00:00:15,940
+And I called my program Guess.
+
+9
+00:00:15,940 --> 00:00:19,240
+So I can run it in the terminal with ./guess.
+
+10
+00:00:19,240 --> 00:00:23,570
+Here go to ./guess, hit Enter, and I have to guess a number.
+
+11
+00:00:23,570 --> 00:00:26,630
+So here I might guess, maybe 2, and hit Enter.
+
+12
+00:00:26,630 --> 00:00:28,880
+But then I get this flood of messages in the terminal.
+
+13
+00:00:28,880 --> 00:00:31,205
+And I'm wondering, well, what's wrong with this?
+
+14
+00:00:31,205 --> 00:00:32,830
+Why am I getting so many messages here?
+
+15
+00:00:32,830 --> 00:00:39,070
+And to try to figure that out, I can go into my code with code guest.c.
+
+16
+00:00:39,070 --> 00:00:44,000
+And then I can see, well, I'm not entirely sure what may be wrong here.
+
+17
+00:00:44,000 --> 00:00:46,070
+So I need to pause my code at some point.
+
+18
+00:00:46,070 --> 00:00:47,800
+And for that, I can use a break point.
+
+19
+00:00:47,800 --> 00:00:51,100
+So let me go ahead and go to this left side of my guess.c file, where
+
+20
+00:00:51,100 --> 00:00:54,040
+I see these red circles pop up.
+
+21
+00:00:54,040 --> 00:00:57,640
+I can click on one of them to turn it bright red.
+
+22
+00:00:57,640 --> 00:01:00,760
+And at that point, I've set a pause point in my code.
+
+23
+00:01:00,760 --> 00:01:04,269
+And I can use debug50 to go in and actually step through my code
+
+24
+00:01:04,269 --> 00:01:06,680
+and see what's going on in there.
+
+25
+00:01:06,680 --> 00:01:11,500
+So let me go ahead and type debug50 of guess, hit Enter.
+
+26
+00:01:11,500 --> 00:01:14,140
+So now that I have my code opened up in debug50,
+
+27
+00:01:14,140 --> 00:01:15,550
+I can see a few different things.
+
+28
+00:01:15,550 --> 00:01:19,150
+I can see that my number variable is currently set to 0.
+
+29
+00:01:19,150 --> 00:01:23,550
+And my guess is currently set to this odd 32,764.
+
+30
+00:01:23,550 --> 00:01:25,300
+But as I go through my code, I'll actually
+
+31
+00:01:25,300 --> 00:01:27,350
+see those numbers fall into place.
+
+32
+00:01:27,350 --> 00:01:32,510
+So if I use this Step Over button to walked to the next line of my code,
+
+33
+00:01:32,510 --> 00:01:37,240
+I can see that number becomes 5, as I expect it to on line 6.
+
+34
+00:01:37,240 --> 00:01:41,410
+And then as I go to line 8 and Step Over that, I get prompted for,
+
+35
+00:01:41,410 --> 00:01:42,610
+what's my guess?
+
+36
+00:01:42,610 --> 00:01:45,670
+And at that point, I might type, well, 3 again.
+
+37
+00:01:45,670 --> 00:01:47,940
+And I'll hit Enter.
+
+38
+00:01:47,940 --> 00:01:50,130
+And then I see guess becomes 3.
+
+39
+00:01:50,130 --> 00:01:55,680
+So now I'm wondering, well, if my guess is wrong and my number is 5,
+
+40
+00:01:55,680 --> 00:01:58,750
+my guess is 3, shouldn't I only get wrong guess just once?
+
+41
+00:01:58,750 --> 00:02:01,970
+So I'll actually just keep walking through my code with Step Over.
+
+42
+00:02:01,970 --> 00:02:04,700
+And I'll see, I'm printing "Wrong guess!", which seems right.
+
+43
+00:02:04,700 --> 00:02:06,650
+And now I should just exit the program.
+
+44
+00:02:06,650 --> 00:02:07,430
+That should be it.
+
+45
+00:02:07,430 --> 00:02:10,580
+But I really see that my line in that yellow highlight
+
+46
+00:02:10,580 --> 00:02:14,236
+is going back up to 10, line 10 there.
+
+47
+00:02:14,236 --> 00:02:18,650
+And it's actually continuing to go through and print "Wrong guess!"
+
+48
+00:02:18,650 --> 00:02:21,700
+And so at this point, I can actually see that maybe the bug in my code
+
+49
+00:02:21,700 --> 00:02:23,320
+is I shouldn't have used a while loop.
+
+50
+00:02:23,320 --> 00:02:25,330
+I should have, maybe, used an if statement,
+
+51
+00:02:25,330 --> 00:02:27,890
+where I'm only checking for this condition once.
+
+52
+00:02:27,890 --> 00:02:30,550
+So now that my while loop has changed to an if statement,
+
+53
+00:02:30,550 --> 00:02:33,530
+I should be able to recompile my code and see what's changed.
+
+54
+00:02:33,530 --> 00:02:35,800
+So I can use "make guess".
+
+55
+00:02:35,800 --> 00:02:38,760
+And then I'll run my code, guess.
+
+56
+00:02:38,760 --> 00:02:41,550
+And when I guess 3, I guess I should get "Wrong guess!"
+
+57
+00:02:41,550 --> 00:02:42,870
+So I'll do 3.
+
+58
+00:02:42,870 --> 00:02:47,310
+And then I'll get "Wrong guess!", but also "You're correct!".
+
+59
+00:02:47,310 --> 00:02:50,110
+And at this point, there's probably another bug in my code.
+
+60
+00:02:50,110 --> 00:02:52,380
+And so I'll actually leave this one up to you,
+
+61
+00:02:52,380 --> 00:02:56,220
+to use debug50 and see, well, why am I getting both "Wrong Guess!"
+
+62
+00:02:56,220 --> 00:02:58,520
+and "You're correct!"?
+
+63
+00:02:58,520 --> 00:03:00,000
+
+

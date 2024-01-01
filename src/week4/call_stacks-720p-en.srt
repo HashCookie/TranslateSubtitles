@@ -1,0 +1,628 @@
+0
+00:00:00,000 --> 00:00:01,844
+[MUSIC PLAYING]
+
+1
+00:00:01,844 --> 00:00:05,540
+
+
+2
+00:00:05,540 --> 00:00:08,210
+DOUG LLOYD: If you saw our video on recursion,
+
+3
+00:00:08,210 --> 00:00:10,790
+the process might have seemed a little bit magical.
+
+4
+00:00:10,790 --> 00:00:14,060
+How does a function know to wait for another function
+
+5
+00:00:14,060 --> 00:00:19,000
+and pass its data to some other thing that's running at the same time?
+
+6
+00:00:19,000 --> 00:00:20,750
+It can seem a little magical at the outset
+
+7
+00:00:20,750 --> 00:00:26,120
+if you don't understand exactly how functions are called and operate in C.
+
+8
+00:00:26,120 --> 00:00:29,540
+And the way they operate is using something called the call stack.
+
+9
+00:00:29,540 --> 00:00:31,680
+And the way the call stack works is as follows.
+
+10
+00:00:31,680 --> 00:00:36,050
+If you call a function, basically what happens is a big chunk of memory
+
+11
+00:00:36,050 --> 00:00:39,167
+is set aside somewhere in the system for that function to do its work.
+
+12
+00:00:39,167 --> 00:00:41,750
+So for example, if you call a function and the first thing you
+
+13
+00:00:41,750 --> 00:00:45,170
+do is declare a couple of variables, what's going to happen
+
+14
+00:00:45,170 --> 00:00:48,230
+is a stack frame or a function frame will be created,
+
+15
+00:00:48,230 --> 00:00:51,535
+a big chunk of memory, and those variables will be given space.
+
+16
+00:00:51,535 --> 00:00:54,380
+So if it's three integers, you'll get three, four-byte chunks,
+
+17
+00:00:54,380 --> 00:00:56,930
+just like the size of an integer, as well as some space
+
+18
+00:00:56,930 --> 00:01:01,021
+to do some calculations and whatever else the function might need.
+
+19
+00:01:01,021 --> 00:01:03,270
+And that's where the function will do all of its work.
+
+20
+00:01:03,270 --> 00:01:06,900
+Now, it's possible that more than one function's frame might
+
+21
+00:01:06,900 --> 00:01:09,220
+exist in memory at any given time.
+
+22
+00:01:09,220 --> 00:01:11,520
+So for example, let's say the function main
+
+23
+00:01:11,520 --> 00:01:13,500
+calls another function called move.
+
+24
+00:01:13,500 --> 00:01:17,520
+And then the function move calls another function called direction.
+
+25
+00:01:17,520 --> 00:01:21,690
+At that point, all three of those functions have open frames.
+
+26
+00:01:21,690 --> 00:01:25,380
+But in general, only one of those frames will ever be active.
+
+27
+00:01:25,380 --> 00:01:28,080
+Only one of those functions is ever running at a given time,
+
+28
+00:01:28,080 --> 00:01:31,900
+even though all three of them have space set aside and are sort of hanging out,
+
+29
+00:01:31,900 --> 00:01:34,230
+waiting to do something.
+
+30
+00:01:34,230 --> 00:01:37,640
+Now, the way these frames are arranged is in what's called a stack.
+
+31
+00:01:37,640 --> 00:01:39,390
+And the frame for the most recently called
+
+32
+00:01:39,390 --> 00:01:41,790
+function is always the one at the top of the stack,
+
+33
+00:01:41,790 --> 00:01:44,050
+and that is called the active frame.
+
+34
+00:01:44,050 --> 00:01:47,520
+So again, if main called move and move called direction,
+
+35
+00:01:47,520 --> 00:01:51,000
+you can think about this like a stack as follows, where main is at the bottom,
+
+36
+00:01:51,000 --> 00:01:55,390
+move is above it, direction is on the top, and direction is the active frame.
+
+37
+00:01:55,390 --> 00:01:58,200
+That is the only function that is doing anything at the moment,
+
+38
+00:01:58,200 --> 00:02:02,220
+whereas move and main are just sort of waiting to become the active frame.
+
+39
+00:02:02,220 --> 00:02:05,970
+They're waiting to become the frame that is at the top of the stack.
+
+40
+00:02:05,970 --> 00:02:09,060
+When you call a new function, a new frame
+
+41
+00:02:09,060 --> 00:02:11,547
+is what's called pushed onto the top of the stack.
+
+42
+00:02:11,547 --> 00:02:13,380
+So if you call a new function, that function
+
+43
+00:02:13,380 --> 00:02:16,590
+immediately gets space and memory, and is put on top of the call stack.
+
+44
+00:02:16,590 --> 00:02:18,420
+And it becomes the active frame.
+
+45
+00:02:18,420 --> 00:02:21,960
+And whatever was the active frame, if there was one, is on pause.
+
+46
+00:02:21,960 --> 00:02:23,260
+It's just sitting there.
+
+47
+00:02:23,260 --> 00:02:26,922
+It's a holding pattern, waiting to become the active frame again.
+
+48
+00:02:26,922 --> 00:02:29,880
+When a function finishes its work, such as by returning, most commonly,
+
+49
+00:02:29,880 --> 00:02:32,546
+or perhaps reaching the end of the line if it's a void function,
+
+50
+00:02:32,546 --> 00:02:36,210
+it doesn't have a return value, that frame is
+
+51
+00:02:36,210 --> 00:02:38,520
+what's called popped off of the stack.
+
+52
+00:02:38,520 --> 00:02:42,400
+And then the frame that was in second place, since this frame is now gone,
+
+53
+00:02:42,400 --> 00:02:43,650
+that becomes the active frame.
+
+54
+00:02:43,650 --> 00:02:44,890
+It resumes where it left off.
+
+55
+00:02:44,890 --> 00:02:46,550
+If you would hit pause on that function, it's
+
+56
+00:02:46,550 --> 00:02:48,570
+going to pick up immediately where it left off.
+
+57
+00:02:48,570 --> 00:02:52,920
+This is actually why recursion works because all these frames are running,
+
+58
+00:02:52,920 --> 00:02:55,050
+but only one of them is moving at a given time.
+
+59
+00:02:55,050 --> 00:02:57,840
+The rest of them are all running, but they're on pause.
+
+60
+00:02:57,840 --> 00:03:01,380
+They're just waiting to become the new top of the stack again.
+
+61
+00:03:01,380 --> 00:03:05,430
+If we call another function, the active frame goes on pause again.
+
+62
+00:03:05,430 --> 00:03:09,090
+The function that just called is put on top and so on and so on
+
+63
+00:03:09,090 --> 00:03:12,340
+until all of the function frames are finished.
+
+64
+00:03:12,340 --> 00:03:14,340
+So let's take a look at a visualization of this,
+
+65
+00:03:14,340 --> 00:03:17,490
+an example using the factorial function to see if we can
+
+66
+00:03:17,490 --> 00:03:20,020
+help make this a little bit clearer.
+
+67
+00:03:20,020 --> 00:03:23,280
+So this is the entirety of a factorial file, for example.
+
+68
+00:03:23,280 --> 00:03:26,400
+And inside of that factorial file, I have two functions, fact,
+
+69
+00:03:26,400 --> 00:03:29,340
+which is going to be a recursive [? implementation ?] of factorial,
+
+70
+00:03:29,340 --> 00:03:34,180
+and main, which basically just call or prints out the value of factorial,
+
+71
+00:03:34,180 --> 00:03:35,670
+in this case, of 5.
+
+72
+00:03:35,670 --> 00:03:38,250
+So we start at the beginning of main.
+
+73
+00:03:38,250 --> 00:03:41,550
+And the first thing main does is it calls another function.
+
+74
+00:03:41,550 --> 00:03:43,350
+It calls printf().
+
+75
+00:03:43,350 --> 00:03:47,370
+As soon as it does that, main is on pause.
+
+76
+00:03:47,370 --> 00:03:52,230
+It's hanging out right here and it is waiting for printf() to do its work.
+
+77
+00:03:52,230 --> 00:03:53,650
+What does printf() have to do?
+
+78
+00:03:53,650 --> 00:03:56,784
+It just has to print out a number, but it has to print out factorial of 5
+
+79
+00:03:56,784 --> 00:03:58,200
+or it doesn't know factorial of 5.
+
+80
+00:03:58,200 --> 00:04:00,330
+It has to make a function call.
+
+81
+00:04:00,330 --> 00:04:03,870
+So printf() then goes on pause and waits for factorial of 5,
+
+82
+00:04:03,870 --> 00:04:07,130
+which now becomes the new active frame.
+
+83
+00:04:07,130 --> 00:04:09,240
+So in the factorial of 5 frame, what's happening?
+
+84
+00:04:09,240 --> 00:04:11,610
+We're passing in the value 5 to the fact function.
+
+85
+00:04:11,610 --> 00:04:14,510
+And then it's going to check, well, is n equal to 1?
+
+86
+00:04:14,510 --> 00:04:15,220
+No.
+
+87
+00:04:15,220 --> 00:04:20,244
+So then it's going to return n times fact n minus 1.
+
+88
+00:04:20,244 --> 00:04:25,010
+OK, so now the factorial 5 frame is basically calling a new function,
+
+89
+00:04:25,010 --> 00:04:29,500
+passing in another call to factorial, passing in 4 as the parameter instead.
+
+90
+00:04:29,500 --> 00:04:33,970
+So the factorial of 5 frame now goes on pause and a frame for factorial of 4
+
+91
+00:04:33,970 --> 00:04:35,179
+becomes the new active frame.
+
+92
+00:04:35,179 --> 00:04:37,094
+And it's going to go through the same process.
+
+93
+00:04:37,094 --> 00:04:37,960
+Is 4 equal to 1?
+
+94
+00:04:37,960 --> 00:04:38,680
+No.
+
+95
+00:04:38,680 --> 00:04:41,440
+So instead, it's going to return n times, in this case,
+
+96
+00:04:41,440 --> 00:04:45,010
+or four times factorial of 3, another function call.
+
+97
+00:04:45,010 --> 00:04:47,430
+So factorial of 4 frame goes on pause.
+
+98
+00:04:47,430 --> 00:04:50,170
+Factorial of 3's frame becomes the new active frame.
+
+99
+00:04:50,170 --> 00:04:55,030
+And repeat this process again for a factorial of 3, for a factorial of 2,
+
+100
+00:04:55,030 --> 00:04:57,520
+and then we get to factorial of 1.
+
+101
+00:04:57,520 --> 00:05:01,540
+So at the very beginning, right when factorial of 1 is called,
+
+102
+00:05:01,540 --> 00:05:06,250
+there are seven function frames in the call stack.
+
+103
+00:05:06,250 --> 00:05:11,470
+Factorial of 2, 3, 4, 5 printf() and main are all on pause at the lines that
+
+104
+00:05:11,470 --> 00:05:12,070
+you see there.
+
+105
+00:05:12,070 --> 00:05:16,930
+There's just hanging out, waiting to become the new active frame again.
+
+106
+00:05:16,930 --> 00:05:21,950
+But they're not moving from those arrowed indicators.
+
+107
+00:05:21,950 --> 00:05:23,680
+So factorial of 1's frame begins.
+
+108
+00:05:23,680 --> 00:05:26,560
+It asks the question, is n equal to 1?
+
+109
+00:05:26,560 --> 00:05:28,780
+Well, this case, the answer is yes.
+
+110
+00:05:28,780 --> 00:05:30,730
+It's going to return 1.
+
+111
+00:05:30,730 --> 00:05:34,720
+Now, remember what happens when a function returns a value,
+
+112
+00:05:34,720 --> 00:05:37,030
+that frame is done.
+
+113
+00:05:37,030 --> 00:05:38,210
+It goes away.
+
+114
+00:05:38,210 --> 00:05:41,530
+And that means that it gets popped back off of the call stack
+
+115
+00:05:41,530 --> 00:05:44,680
+and then the frame that is below it will become the new active frame.
+
+116
+00:05:44,680 --> 00:05:47,710
+So factorial of 1 returns a 1.
+
+117
+00:05:47,710 --> 00:05:51,190
+At this point, its frame is destroyed and factorial of 2
+
+118
+00:05:51,190 --> 00:05:52,961
+can now get unpaused.
+
+119
+00:05:52,961 --> 00:05:55,210
+Now, factorial of 2 is that dark blue line on the left
+
+120
+00:05:55,210 --> 00:05:59,170
+there and it was waiting on the return value of factorial of 1.
+
+121
+00:05:59,170 --> 00:06:01,930
+Well, factorial of 1 said, I returned a 1 to you.
+
+122
+00:06:01,930 --> 00:06:06,310
+So factorial of 2 is going to return 2 times 1, or 2.
+
+123
+00:06:06,310 --> 00:06:10,500
+It is now also returning and so when it returns, it gets popped off the stack.
+
+124
+00:06:10,500 --> 00:06:13,450
+Its function frame is destroyed and factorial of 3
+
+125
+00:06:13,450 --> 00:06:15,840
+becomes the new active frame.
+
+126
+00:06:15,840 --> 00:06:20,080
+Factorial of 3 was waiting on factorial of 2, which returned a 2.
+
+127
+00:06:20,080 --> 00:06:24,544
+So it's going to return 3 times 2, or 6, returns the value.
+
+128
+00:06:24,544 --> 00:06:26,460
+Its function frame is popped off of the stack.
+
+129
+00:06:26,460 --> 00:06:27,690
+It is destroyed.
+
+130
+00:06:27,690 --> 00:06:30,760
+Factorial of 4 becomes the new active frame.
+
+131
+00:06:30,760 --> 00:06:33,340
+Factorial of 4 was waiting on factorial of 3.
+
+132
+00:06:33,340 --> 00:06:34,720
+It got its answer back of 6.
+
+133
+00:06:34,720 --> 00:06:36,960
+So it's going to return 4 times 6, or 24.
+
+134
+00:06:36,960 --> 00:06:40,570
+And it's going to return that value to factorial of 5, which has been waiting
+
+135
+00:06:40,570 --> 00:06:42,580
+for factorial of 4 to finish its work.
+
+136
+00:06:42,580 --> 00:06:46,367
+It returns 5 times 24, which is 120.
+
+137
+00:06:46,367 --> 00:06:48,700
+When that frame is destroyed, now we resume at printf().
+
+138
+00:06:48,700 --> 00:06:51,010
+printf() has that dark red line on the bottom there.
+
+139
+00:06:51,010 --> 00:06:55,360
+It was waiting on factorial of 5, which just returned a 120.
+
+140
+00:06:55,360 --> 00:06:59,320
+So what printf() does is it prints out 120 and then its job is done.
+
+141
+00:06:59,320 --> 00:07:00,820
+It doesn't have anything else to do.
+
+142
+00:07:00,820 --> 00:07:05,410
+It's not waiting on another function call and so it finishes executing.
+
+143
+00:07:05,410 --> 00:07:10,000
+It doesn't return anything, but it doesn't have anything else to do.
+
+144
+00:07:10,000 --> 00:07:11,560
+So its function frame is destroyed.
+
+145
+00:07:11,560 --> 00:07:13,250
+It gets popped off of the stack.
+
+146
+00:07:13,250 --> 00:07:15,610
+And then all we have to do is see where main left off.
+
+147
+00:07:15,610 --> 00:07:17,200
+Well, that was all main had.
+
+148
+00:07:17,200 --> 00:07:20,140
+And so main's function frame will then pop off the stack as well
+
+149
+00:07:20,140 --> 00:07:24,146
+and this program will have completed its job by printing out 120.
+
+150
+00:07:24,146 --> 00:07:26,020
+Hopefully that illustration of the call stack
+
+151
+00:07:26,020 --> 00:07:28,480
+helped to show exactly how recursion works
+
+152
+00:07:28,480 --> 00:07:31,300
+and how these functions are waiting and interacting with each other
+
+153
+00:07:31,300 --> 00:07:35,080
+to allow the recursive process to occur.
+
+154
+00:07:35,080 --> 00:07:36,190
+I'm Doug Lloyd.
+
+155
+00:07:36,190 --> 00:07:37,960
+This is CS50.
+
+156
+00:07:37,960 --> 00:07:39,545
+
+
